@@ -2620,6 +2620,7 @@ class BcBaserHelper extends Helper
      * @param string $title
      * @checked
      * @noTodo
+     * @unitTest
      */
     public function setHomeTitle($title = null)
     {

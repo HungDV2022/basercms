@@ -674,13 +674,13 @@ class BcBaserHelperTest extends BcTestCase
      */
     public function testSetHomeTitle()
     {
-        $this->markTestIncomplete('このテストは、まだ実装されていません。');
-
         $this->BcBaser->setHomeTitle();
-        $this->assertEquals(null, $this->_View->viewVars['homeTitle'], 'タイトルをセットできません。');
+        $view = $this->BcBaser->getView('viewVars');
+        $this->assertEquals(null, $view->get('homeTitle'));
 
         $this->BcBaser->setHomeTitle('hoge');
-        $this->assertEquals('hoge', $this->_View->viewVars['homeTitle'], 'タイトルをセットできません。');
+        $view = $this->BcBaser->getView();
+        $this->assertEquals('hoge', $view->get('homeTitle'));
     }
 
     /**
