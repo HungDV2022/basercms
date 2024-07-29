@@ -325,6 +325,30 @@ class BcUtilTest extends BcTestCase
     }
 
     /**
+     * test clearModelCache
+     */
+    public function testClearModelCache()
+    {
+        // cache環境準備
+        Cache::drop('_cake_model_');
+        Cache::setConfig('_cake_model_', [
+            'className' => "File",
+            'prefix' => 'myapp_cake_model_',
+            'path' => CACHE . 'models' . DS,
+            'serialize' => true,
+            'duration' => '+999 days',
+        ]);
+        Cache::write('_cake_model_test', 'testtest', '_cake_model_');
+        //_cake_model_が設定できるか確認すること
+        $this->assertNotNull(Cache::read('_cake_model_test', '_cake_model_'));
+
+        //キャッシュを削除する
+        BcUtil::clearModelCache();
+        //_cake_model_がないか確認すること
+        $this->assertNull(Cache::read('_cake_model_test', '_cake_model_'));
+    }
+
+    /**
      * 管理システムかチェック
      *
      * @param string $url 対象URL
